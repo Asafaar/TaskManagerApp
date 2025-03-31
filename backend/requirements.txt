@@ -1,0 +1,8 @@
+Flask==2.2.3
+Werkzeug==2.2.3
+pyjwt==2.6.0
+bcrypt==4.0.1
+pymysql==1.0.3
+Flask-Cors==3.0.10
+flask-jwt-extended==4.4.4
+cryptography
