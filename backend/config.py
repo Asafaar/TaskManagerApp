@@ -13,4 +13,3 @@ DB_USER = os.environ.get('DB_USER', 'root')
 DB_PASSWORD = os.environ.get('DB_PASSWORD', 'password')
 DB_NAME = os.environ.get('DB_NAME', 'task_manager_db')
 
-print(DB_PASSWORD)
