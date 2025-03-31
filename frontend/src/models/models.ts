@@ -7,7 +7,6 @@ export interface Task {
     due_date?: string | null;
     user_id?: number;
     subtasks?: Subtask[];
-    // אפשר להוסיף כאן גם: subtasks?: Subtask[] אם רוצים לשמור אותם ביחד
   }
   
   export interface Subtask {
