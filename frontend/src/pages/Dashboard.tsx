@@ -253,7 +253,7 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-gray-100 p-4">
   <div className="max-w-6xl mx-auto bg-white p-6 shadow rounded">
     
-    {/* כותרת וכפתורים בשורה רספונסיבית */}
+
     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
       <h1 className="text-2xl font-bold">Dashboard</h1>
       <div className="flex gap-2">
@@ -278,7 +278,6 @@ const Dashboard: React.FC = () => {
       </div>
     </div>
 
-    {/* חיפוש + סינון לפי סטטוס ותאריך */}
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
       <div>
         <label className="block text-sm font-medium mb-1">Search by Title</label>
