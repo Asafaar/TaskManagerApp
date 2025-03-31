@@ -1,16 +1,16 @@
-# backend/models.py
-
 from database import get_connection
 import bcrypt
 
 # ---------------------------------------
 # USERS
 # ---------------------------------------
+
 def create_user(email, username, password):
     """
     יוצר משתמש חדש במסד הנתונים עם סיסמה מוצפנת (hashed).
     """
-    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    # נוודא שה-Hash נשמר כמחרוזת ולא כ-bytes
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     with get_connection() as conn:
         with conn.cursor() as cursor:
             sql = """
@@ -43,6 +43,7 @@ def get_user_by_id(user_id):
 # ---------------------------------------
 # TASKS
 # ---------------------------------------
+
 def create_task(user_id, title, description, status, due_date):
     with get_connection() as conn:
         with conn.cursor() as cursor:
@@ -88,6 +89,7 @@ def delete_task(task_id):
 # ---------------------------------------
 # SUBTASKS
 # ---------------------------------------
+
 def create_subtask(task_id, title, status, due_date):
     with get_connection() as conn:
         with conn.cursor() as cursor:
@@ -104,6 +106,14 @@ def get_subtasks_by_task_id(task_id):
             sql = "SELECT * FROM subtasks WHERE task_id = %s"
             cursor.execute(sql, (task_id,))
             return cursor.fetchall()
+
+def get_subtask_by_id(subtask_id):
+    with get_connection() as conn:
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM subtasks WHERE id = %s"
+            cursor.execute(sql, (subtask_id,))
+            return cursor.fetchone()
+
 def update_subtask(subtask_id, title, status, due_date):
     with get_connection() as conn:
         with conn.cursor() as cursor:
@@ -114,15 +124,10 @@ def update_subtask(subtask_id, title, status, due_date):
             """
             cursor.execute(sql, (title, status, due_date, subtask_id))
         conn.commit()
+
 def delete_subtask(subtask_id):
     with get_connection() as conn:
         with conn.cursor() as cursor:
             sql = "DELETE FROM subtasks WHERE id = %s"
             cursor.execute(sql, (subtask_id,))
         conn.commit()
-def get_subtask_by_id(subtask_id):
-    with get_connection() as conn:
-        with conn.cursor() as cursor:
-            sql = "SELECT * FROM subtasks WHERE id = %s"
-            cursor.execute(sql, (subtask_id,))
-            return cursor.fetchone()
