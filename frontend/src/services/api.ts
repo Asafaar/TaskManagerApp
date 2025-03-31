@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 
-// כתובת הבסיס של ה-Backend (משתנה בהתאם לסביבה)
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // -------------------------------------
@@ -20,14 +19,14 @@ export const login = async (email: string, password: string) => {
 // TASKS
 // -------------------------------------
 
-// משיכת כל המשימות של המשתמש המחובר
+
 export const getTasks = async (token: string) => {
   return axios.get(`${API_BASE_URL}/tasks`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
 
-// יצירת משימה חדשה
+
 export const createTask = async (
   token: string,
   title: string,
@@ -41,7 +40,6 @@ export const createTask = async (
   );
 };
 
-// עדכון משימה קיימת
 export const updateTask = async (
   token: string,
   taskId: number,
@@ -56,7 +54,6 @@ export const updateTask = async (
   );
 };
 
-// מחיקת משימה
 export const deleteTask = async (token: string, taskId: number) => {
   return axios.delete(`${API_BASE_URL}/tasks/${taskId}`, {
     headers: { Authorization: `Bearer ${token}` }
@@ -67,14 +64,12 @@ export const deleteTask = async (token: string, taskId: number) => {
 // SUBTASKS
 // -------------------------------------
 
-// משיכת כל תתי-המשימות של משימה מסוימת
 export const getSubtasks = async (token: string, taskId: number) => {
   return axios.get(`${API_BASE_URL}/tasks/${taskId}/subtasks`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
 
-// יצירת תת-משימה חדשה
 export const createSubtask = async (
   token: string,
   taskId: number,
